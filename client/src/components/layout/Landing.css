@@ -1,0 +1,44 @@
+.landing-image {
+  height: 70vh;
+  margin-top: 110px;
+  background-color: black;
+}
+
+.big-image {
+  background-image: url("../../images/suit-869380_1920\ \(1\).jpg");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.big-image-overlay {
+  background-color: rgba(29, 53, 87, 0.3);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.image-title {
+  color: white;
+  margin-bottom: 5px;
+  margin-left: 50px;
+}
+
+.image-a {
+  font-weight: lighter;
+  font-size: 25px;
+  color: #e63946;
+  margin-left: 50px;
+}
+
+.big-image-overlay > h3 {
+  margin: 0;
+  margin-bottom: 130px;
+}
+
+.big-image-overlay:hover {
+  background-color: rgba(29, 53, 87, 0.4);
+}
