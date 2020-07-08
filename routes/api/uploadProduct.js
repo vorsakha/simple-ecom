@@ -8,7 +8,7 @@ const User = require("../../models/User");
 const Product = require("../../models/Product");
 
 // @route   POST api/upload
-// @desc    Create a product
+// @desc    Create a product (SUPER)
 // @access  Private
 router.post(
   "/",
@@ -57,7 +57,7 @@ router.post(
 );
 
 // @route   PUT api/upload/:id
-// @desc    Update a product
+// @desc    Update a product (SUPER)
 // @access  Private
 router.put(
   "/:id",

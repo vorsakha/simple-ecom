@@ -7,48 +7,12 @@ const auth = require("../../middleware/auth");
 const Order = require("../../models/Order");
 const Product = require("../../models/Product");
 const User = require("../../models/User");
-
-// @route   GET api/order
-// @desc    Get current user's all orders
-// @access  Private
-router.get("/", auth, async (req, res) => {
-  try {
-    const orders = await Order.find({
-      user: req.user._id,
-    });
-
-    if (!orders) {
-      return res.status(400).json({ msg: "Order not found." });
-    }
-
-    res.json(orders);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error.");
-  }
-});
-
-// @route   GET api/order/:id
-// @desc    Get current user's specific order
-// @access  Private
-router.get("/:id", auth, async (req, res) => {
-  try {
-    const order = await Order.findOne({ _id: req.params.id });
-
-    if (!order) {
-      return res.status(400).json({ msg: "Order not found." });
-    }
-
-    res.json(order);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error.");
-  }
-});
+const Cart = require("../../models/Cart");
 
 // @route   DELETE api/order/:id
-// @desc    Get current user's specific order
+// @desc    Delete current user's specific order
 // @access  Private
+// OBSOLETE ?
 router.delete("/:id", auth, async (req, res) => {
   try {
     const order = await Order.findOne({ _id: req.params.id });
@@ -66,49 +30,112 @@ router.delete("/:id", auth, async (req, res) => {
   }
 });
 
-// @route   POST api/order/:id
-// @desc    Create user's orders by item id
+// @route   POST api/order/
+// @desc    Order cart items
 // @access  Private
 router.post(
-  "/:id",
+  "/",
   [
     auth,
-    // [
-    //   check("orderItems", "Order items is required"),
-    //   check("shipping", "Shipping data is required"),
-    //   check("payment", "Payment data is required"),
-    // ],
+    [
+      check("address", "Address is required.").not().isEmpty(),
+      check("city", "City is required.").not().isEmpty(),
+      check("postalCode", "Postal Code is required.").isPostalCode("any"),
+      check("country", "Country  is required.").not().isEmpty(),
+      check("paymentMethod", "Payment Method is required.").not().isEmpty(),
+    ],
   ],
   async (req, res) => {
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //   return res.status(400).json({ errors: errors.array() });
-    // }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
-      const product = await Product.findById(req.params.id);
+      const cart = await Cart.findOne({ user: req.user.id });
 
-      console.log(product);
+      const itemsName = [];
+      const itemsQuantity = [];
+      let itemsPrice = 0;
 
-      //   const newOrder = new Order({
-      //     orderItems: req.body.orderItems,
-      //     user: req.user._id,
-      //     shipping: req.body.shipping,
-      //     payment: req.body.payment,
-      //     itemsPrice: req.body.itemsPrice,
-      //     taxPrice: req.body.taxPrice,
-      //     shippingPrice: req.body.shippingPrice,
-      //     totalPrice: req.body.totalPrice,
-      //   });
+      cart.orders.map((data) => itemsName.push(data.name));
+      cart.orders.map((data) => itemsQuantity.push(data.quantity));
+      cart.orders.map((data) => (itemsPrice = itemsPrice + Number(data.price)));
 
-      //   await newOrder.save();
+      const newOrder = {
+        user: req.user.id,
+        items: {
+          name: itemsName,
+          quantity: itemsQuantity,
+          totalPrice: Number(itemsPrice.toFixed(2)),
+        },
+        shipping: {
+          address: req.body.address,
+          city: req.body.city,
+          postalCode: req.body.postalCode,
+          country: req.body.country,
+        },
+        payment: {
+          paymentMethod: req.body.paymentMethod,
+        },
+      };
 
-      //   res.json(newOrder);
+      const order = new Order(newOrder);
+      await order.save();
+
+      // Clear cart
+      do {
+        cart.orders.pop();
+      } while (cart.orders.length > 0);
+      await cart.save();
+
+      res.json(cart.orders);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error.");
     }
   }
 );
+
+// @route   GET api/order
+// @desc    Get all active orders (SUPER)
+// @access  Private
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user.isAdmin) {
+      return res.status(401).json({ msg: "User not authorized." });
+    }
+    const orders = await Order.find();
+    if (!orders) {
+      return res.status(400).json({ msg: "No order found." });
+    }
+    res.json(orders);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error.");
+  }
+});
+
+// @route   GET api/order/:id
+// @desc    Get specific active order (SUPER)
+// @access  Private
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user.isAdmin) {
+      return res.status(401).json({ msg: "User not authorized." });
+    }
+
+    const order = await Order.findById(req.params.id);
+
+    if (!order) return res.status(400).json({ msg: "Order not found." });
+
+    res.json(order);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error.");
+  }
+});
 
 module.exports = router;

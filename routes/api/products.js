@@ -118,7 +118,7 @@ router.put("/rate/:id/:rate_id", auth, async (req, res) => {
 });
 
 // @route   DELETE api/products/:id
-// @desc    Delete a product by id
+// @desc    Delete a product by id (SUPER)
 // @access  Private
 router.delete("/:id", auth, async (req, res) => {
   try {

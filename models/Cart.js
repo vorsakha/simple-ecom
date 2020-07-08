@@ -14,6 +14,7 @@ const CartSchema = new mongoose.Schema({
       },
       quantity: {
         type: Number,
+        default: 1,
         required: true,
       },
       image: {
@@ -24,7 +25,7 @@ const CartSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      product: {
+      productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "product",
       },
