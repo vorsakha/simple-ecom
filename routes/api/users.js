@@ -6,6 +6,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
+const auth = require("../../middleware/auth");
+
 const User = require("../../models/User");
 const Cart = require("../../models/Cart");
 
@@ -149,6 +151,22 @@ router.post("/create-admin", async (req, res) => {
     });
 
     await cart.save();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error.");
+  }
+});
+
+// @route   DELETE api/users/
+// @desc    Remove user
+// @access  Public
+router.delete("/", auth, async (req, res) => {
+  try {
+    await Cart.findOneAndRemove({ user: req.user.id });
+
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    res.json({ msg: "User removed." });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error.");

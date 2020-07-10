@@ -2,8 +2,6 @@ import React, { Fragment } from "react";
 
 import "./Landing.css";
 
-import bigImage from "../../images/suit-869380_1920 (1).jpg";
-
 const Landing = () => {
   return (
     <Fragment>
@@ -19,7 +17,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className="landing-items">
         <h2>Featured Items</h2>
       </section>
     </Fragment>
