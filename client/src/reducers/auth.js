@@ -2,6 +2,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  SUPER_USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -13,6 +14,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
+  isAdmin: false,
   user: null,
   cart: [],
   orders: [],
@@ -28,6 +30,14 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         user: payload,
+      };
+    case SUPER_USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        isAdmin: true,
+        user: payload,
+        loading: false,
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
@@ -49,6 +59,7 @@ export default function (state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
+        isAdmin: false,
       };
     default:
       return state;

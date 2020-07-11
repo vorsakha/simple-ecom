@@ -6,12 +6,16 @@ import { logout } from "../../actions/auth";
 
 import "./Navbar.css";
 
-const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
+const Navbar = ({
+  auth: { isAuthenticated, loading, user, isAdmin },
+  logout,
+}) => {
   const authMiniLinks = (
     <ul className="menu-ul">
       <li>
-        <Link to="/dashboard" className="log">
-          <i className="fas fa-user"></i> {user && user.name}
+        <Link to={isAdmin ? "/super-dashboard" : "/dashboard"} className="log">
+          <i className={isAdmin ? "fas fa-users-cog" : "fas fa-user"}></i>{" "}
+          {user && user.name}
         </Link>
       </li>
       <li className="dot-li">

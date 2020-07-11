@@ -8,6 +8,12 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Contact from "./components/contact/Contact";
+import superDashboard from "./components/users/superDashboard";
+import Dashboard from "./components/users/Dashboard";
+
+// Routing
+import SuperPrivateRoute from "./routing/SuperPrivateRoute";
+import PrivateRoute from "./routing/PrivateRoute";
 
 // Redux
 import { Provider } from "react-redux";
@@ -34,6 +40,12 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/contact" component={Contact} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <SuperPrivateRoute
+              exact
+              path="/super-dashboard"
+              component={superDashboard}
+            />
           </Switch>
         </Fragment>
       </Router>

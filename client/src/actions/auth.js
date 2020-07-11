@@ -10,6 +10,7 @@ import {
   CLEAR_CART,
   ACCOUNT_DELETED,
   CLEAR_ORDER,
+  SUPER_USER_LOADED,
 } from "../actions/types";
 import { setAlert } from "./alert";
 import setAuthToken from "../utils/setAuthToken";
@@ -22,6 +23,13 @@ export const loadUser = () => async (dispatch) => {
 
   try {
     const res = await axios.get("/api/auth");
+
+    if (res.data.isAdmin) {
+      return dispatch({
+        type: SUPER_USER_LOADED,
+        payload: res.data,
+      });
+    }
 
     dispatch({
       type: USER_LOADED,
