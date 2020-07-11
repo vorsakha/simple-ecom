@@ -18,9 +18,9 @@ router.get("/", auth, async (req, res) => {
       return res.status(401).json({ msg: "User not authorized." });
     }
 
-    const contact = await Contact.find().sort({ date: -1 });
+    const contacts = await Contact.find().sort({ date: -1 });
 
-    res.json(contact);
+    res.json(contacts);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error.");

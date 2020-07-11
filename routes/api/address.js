@@ -89,4 +89,26 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
+// @route   PUT api/address/remove/:id
+// @desc    Remove address by ID
+// @access  Private
+router.put("/remove/:id", auth, async (req, res) => {
+  try {
+    const address = await Address.findOne({ user: req.user.id });
+
+    const removeIndex = address.shipping
+      .map((item) => item.id)
+      .indexOf(req.params.id);
+
+    address.shipping.splice(removeIndex, 1);
+
+    await cart.save();
+
+    res.json(cart);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error.");
+  }
+});
+
 module.exports = router;

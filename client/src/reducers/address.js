@@ -2,7 +2,7 @@ import {
   GET_ADDRESSES,
   GET_ADDRESS,
   ADD_ADDRESS,
-  REMOVE_ADDRESS,
+  UPDATE_ADDRESS,
   ADDRESS_ERROR,
 } from "../actions/types";
 
@@ -18,6 +18,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_ADDRESSES:
+    case UPDATE_ADDRESS:
       return {
         ...state,
         addresses: payload,
@@ -33,12 +34,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         contacts: [payload, ...state.contacts],
-        loading: false,
-      };
-    case REMOVE_ADDRESS:
-      return {
-        ...state,
-        contacts: state.contacts.filter((cont) => cont._id !== payload),
         loading: false,
       };
     case ADDRESS_ERROR:

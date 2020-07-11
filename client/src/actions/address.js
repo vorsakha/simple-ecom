@@ -5,7 +5,7 @@ import {
   GET_ADDRESSES,
   GET_ADDRESS,
   ADD_ADDRESS,
-  REMOVE_ADDRESS,
+  UPDATE_ADDRESS,
   ADDRESS_ERROR,
 } from "./types";
 
@@ -64,6 +64,23 @@ export const createAddress = (formData) => async (dispatch) => {
     dispatch({
       type: ADDRESS_ERROR,
       payload: { msg: err.response.status, status: err.response.status },
+    });
+  }
+};
+
+// Remove address by ID
+export const removeAddress = (id) => async (dispatch) => {
+  try {
+    await axios.put(`/api/address/remove/${id}`);
+
+    dispatch({
+      type: UPDATE_ADDRESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: ADDRESS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };

@@ -77,25 +77,6 @@ export const getOrderById = (id) => async (dispatch) => {
   }
 };
 
-// Delete order by id 
-export const deleteOrder = (id) => async (dispatch) => {
-  try {
-    const res = await axios.delete(`/api/order/${id}`);
-
-    dispatch({
-      type: UPDATE_ORDER,
-      payload: res.data,
-    });
-
-    dispatch(setAlert("Order removed.", "success"));
-  } catch (err) {
-    dispatch({
-      type: ORDER_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
 // Order cart items
 export const orderItems = (formData) => (dispatch) => {
     const config = {
