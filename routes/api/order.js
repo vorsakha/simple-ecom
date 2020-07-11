@@ -5,30 +5,8 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 
 const Order = require("../../models/Order");
-const Product = require("../../models/Product");
 const User = require("../../models/User");
 const Cart = require("../../models/Cart");
-
-// @route   DELETE api/order/:id
-// @desc    Delete current user's specific order
-// @access  Private
-// OBSOLETE ?
-router.delete("/:id", auth, async (req, res) => {
-  try {
-    const order = await Order.findOne({ _id: req.params.id });
-
-    if (!order) {
-      return res.status(400).json({ msg: "Order not found." });
-    }
-
-    const deletedOrder = await order.remove();
-
-    res.json(deletedOrder);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error.");
-  }
-});
 
 // @route   POST api/order/
 // @desc    Order cart items
@@ -78,6 +56,13 @@ router.post(
         payment: {
           paymentMethod: req.body.paymentMethod,
         },
+        taxPrice: req.body.taxPrice,
+        shippingPrice: req.body.shippingPrice,
+        isPaid: req.body.isPaid,
+        paidAt: req.body.paidAt,
+        isDelivered: req.body.isDelivered,
+        deliveredAt: req.body.deliveredAt,
+        status: req.body.status,
       };
 
       const order = new Order(newOrder);

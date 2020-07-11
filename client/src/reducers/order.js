@@ -20,7 +20,6 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_ORDER:
-    case UPDATE_ORDER:
       return {
         ...state,
         order: payload,
@@ -28,6 +27,7 @@ export default function (state = initialState, action) {
       };
     case GET_ORDER_HISTORY:
     case GET_ORDERS:
+    case UPDATE_ORDER:
       return {
         ...state,
         orders: payload,
