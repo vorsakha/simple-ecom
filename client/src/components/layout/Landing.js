@@ -10,7 +10,7 @@ const Landing = () => {
           <div className="big-image-overlay">
             <h2 className="image-title">New Suits</h2>
             <h3>
-              <a className="image-a" href="#">
+              <a className="image-a" href="!#">
                 Shop Now
               </a>
             </h3>

@@ -10,6 +10,8 @@ import Login from "./components/auth/Login";
 import Contact from "./components/contact/Contact";
 import superDashboard from "./components/users/superDashboard";
 import Dashboard from "./components/users/Dashboard";
+import CreateProduct from "./components/product/CreateProduct";
+import Alert from "./components/layout/Alert";
 
 // Routing
 import SuperPrivateRoute from "./routing/SuperPrivateRoute";
@@ -35,6 +37,9 @@ function App() {
       <Router>
         <Fragment>
           <Navbar />
+          <div className="alert-container">
+            <Alert />
+          </div>
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
@@ -45,6 +50,11 @@ function App() {
               exact
               path="/super-dashboard"
               component={superDashboard}
+            />
+            <SuperPrivateRoute
+              exact
+              path="/create-product"
+              component={CreateProduct}
             />
           </Switch>
         </Fragment>

@@ -16,7 +16,7 @@ const SuperPrivateRoute = ({
         isAuthenticated && !loading && isAdmin ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/dashboard" />
+          <Redirect to="/" />
         )
       }
     />

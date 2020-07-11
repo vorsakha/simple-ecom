@@ -20,6 +20,7 @@ export const createProduct = (formData, history) => async (dispatch) => {
     };
 
     const res = await axios.post("/api/upload", formData, config);
+    console.log(res.data);
 
     dispatch({
       type: ADD_PRODUCT,
@@ -28,12 +29,19 @@ export const createProduct = (formData, history) => async (dispatch) => {
 
     dispatch(setAlert("Product created.", "success"));
 
-    history.push("/dashboard");
+    history.push("/super-dashboard");
   } catch (err) {
-    const errors = err.response.data.errors;
+    if (err.response) {
+      const errors = err.response.data.errors;
 
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+      }
+
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
     }
   }
 };
@@ -69,7 +77,7 @@ export const editProduct = (formData, id, history) => async (dispatch) => {
 // Delete product by ID (super)
 export const deleteProduct = (id) => async (dispatch) => {
   try {
-    const res = await axios.delete(`/api/products/${id}`);
+    await axios.delete(`/api/products/${id}`);
 
     dispatch({
       type: REMOVE_PRODUCT,

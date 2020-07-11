@@ -1,0 +1,10 @@
+.form-group > textarea {
+  width: 100%;
+  resize: none;
+  height: 200px;
+  padding: 10px;
+}
+
+.mb-2 {
+  margin-bottom: 20px;
+}

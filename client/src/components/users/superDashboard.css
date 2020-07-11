@@ -1,0 +1,25 @@
+.super-dashboard {
+  margin-top: 130px;
+  text-align: center;
+}
+
+.info {
+  width: 100vw;
+  height: 70vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.info > div {
+  width: 50%;
+  overflow: auto;
+}
+
+.btn-large {
+  width: 300px;
+}
+
+.first {
+  border-right: 1px solid var(--blue);
+}
