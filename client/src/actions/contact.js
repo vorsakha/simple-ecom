@@ -7,7 +7,6 @@ import {
   ADD_CONTACT,
   REMOVE_CONTACT,
   CONTACT_ERROR,
-  PRODUCT_ERROR,
 } from "./types";
 
 // Get all contact messages (super)
@@ -62,7 +61,7 @@ export const createContact = (formData) => async (dispatch) => {
     dispatch(setAlert("Contact send.", "success"));
   } catch (err) {
     dispatch({
-      type: PRODUCT_ERROR,
+      type: CONTACT_ERROR,
       payload: { msg: err.response.status, status: err.response.status },
     });
   }

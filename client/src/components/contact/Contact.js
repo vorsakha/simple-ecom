@@ -5,37 +5,31 @@ import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-import "./Register.css";
+import "./Contact.css";
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Contact = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
-    password2: "",
+    message: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, message } = formData;
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== password2) {
-      setAlert("Passwords do not match", "danger", 2000);
-    } else {
-      register({ name, email, password });
-    }
   };
 
   if (isAuthenticated) return <Redirect to={"/dashboard"} />;
 
   return (
     <div className="form-container">
-      <h1 className="title">Sign Up</h1>
-      <p>
-        <i className="fas fa-user"></i> Create Your Account
+      <h1 className="title">Contact</h1>
+      <p className="lead">
+        <i className="fas fa-envelope"></i> Create a contact message
       </p>
       <form
         className="form"
@@ -63,48 +57,28 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           />
         </div>
         <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
+          <textarea
+            className="message"
+            placeholder="Create a message with 300 or less characters."
+            name="message"
             minLength="6"
-            value={password}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="password2"
-            minLength="6"
-            value={password2}
+            maxLength="300"
+            value={message}
             onChange={(e) => handleChange(e)}
           />
         </div>
         <input type="submit" className="btn" value="Register" />
       </form>
-      <p>
-        Already have an account?{" "}
-        <Link className="btn btn-blue" to="/login">
-          Sign In
-        </Link>
-      </p>
     </div>
   );
 };
 
-Register.propTypes = {
+Contact.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, {
   setAlert,
-  register,
-})(Register);
+})(Contact);

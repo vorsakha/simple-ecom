@@ -10,6 +10,7 @@ const auth = require("../../middleware/auth");
 
 const User = require("../../models/User");
 const Cart = require("../../models/Cart");
+const Address = require("../../models/Address");
 
 // @route   POST api/users
 // @desc    Register user
@@ -83,12 +84,19 @@ router.post(
       );
       //
 
-      // Create a cart
+      // Create cart object
       const cart = new Cart({
         user: user._id,
       });
 
       await cart.save();
+
+      // Create Address object
+      const address = new Address({
+        user: user._id,
+      });
+
+      await address.save();
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error.");
@@ -163,6 +171,8 @@ router.post("/create-admin", async (req, res) => {
 router.delete("/", auth, async (req, res) => {
   try {
     await Cart.findOneAndRemove({ user: req.user.id });
+
+    await Address.findOneAndRemove({ user: req.user.id });
 
     await User.findOneAndRemove({ _id: req.user.id });
 

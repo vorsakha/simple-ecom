@@ -8,18 +8,56 @@
   font-family: sans-serif;
 }
 
+:root {
+  --red: #e63946;
+  --blue: #1d3557;
+  --white: white;
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
   letter-spacing: 1.7px;
+  color: var(--blue);
 }
 
 .App {
   text-align: center;
-  color: #1d3557;
+  color: var(--blue);
 }
 
 h2 {
   font-size: 45px;
   font-weight: lighter;
+}
+
+.btn {
+  font-size: 20px;
+  color: var(--red);
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration-line: underline;
+  width: 100px;
+  align-self: center;
+  padding: 5px 15px 5px 5px;
+  border-radius: 3px;
+}
+
+.btn:hover {
+  color: var(--white);
+  background-color: var(--red);
+}
+
+.btn-blue {
+  color: var(--blue);
+  padding: 5px 15px 5px 5px;
+  font-size: 16px;
+  border-radius: 3px;
+}
+
+.btn-blue:hover {
+  color: var(--white);
+  background-color: var(--blue);
 }

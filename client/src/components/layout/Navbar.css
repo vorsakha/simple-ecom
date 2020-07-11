@@ -12,7 +12,7 @@ nav {
   padding-left: 35px;
   padding-right: 20px;
   height: 80px;
-  background-color: white;
+  background-color: var(--white);
 }
 
 .menu-ul {
@@ -31,15 +31,17 @@ nav {
   padding-right: 20px;
   height: 30px;
   align-items: center;
-  background-color: #1d3557;
+  background-color: var(--blue);
   width: 100vw;
 }
 
 .logo {
   font-size: 75px;
   margin: 0;
-  color: #e63946;
+  color: var(--red);
   font-family: "Bebas Neue", cursive;
+  display: flex;
+  align-items: center;
 }
 
 .log {
@@ -56,11 +58,32 @@ nav {
   margin: 0 20px;
   text-decoration: none;
   padding: 5px;
-  color: #1d3557;
+  color: var(--blue);
   font-weight: lighter;
   letter-spacing: 1.7px;
 }
 
 .log:hover {
-  color: #e63946;
+  color: var(--red);
+}
+
+.title-a {
+  text-decoration-line: none;
+  cursor: pointer;
+}
+
+.dot {
+  color: var(--white);
+  font-size: 5px;
+}
+
+.dot-li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-dot {
+  font-size: 20px;
+  margin: 2px;
 }

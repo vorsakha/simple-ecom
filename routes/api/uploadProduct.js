@@ -14,13 +14,15 @@ router.post(
   "/",
   [
     auth,
-    [check("name", "Item name is required").not().isEmpty()],
-    [check("image", "Item image is required").not().isEmpty()],
-    [check("brand", "Item brand is required").not().isEmpty()],
-    [check("price", "Item price is required").not().isEmpty()],
-    [check("category", "Item category is required").not().isEmpty()],
-    [check("countInStock", "Item stock is required").not().isEmpty()],
-    [check("description", "Item description is required").not().isEmpty()],
+    [
+      check("name", "Item name is required").not().isEmpty(),
+      check("image", "Item image is required").not().isEmpty(),
+      check("brand", "Item brand is required").not().isEmpty(),
+      check("price", "Item price is required").not().isEmpty(),
+      check("category", "Item category is required").not().isEmpty(),
+      check("countInStock", "Item stock is required").not().isEmpty(),
+      check("description", "Item description is required").not().isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);

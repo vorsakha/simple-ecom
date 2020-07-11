@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { check, validationResult } = require("express-validator");
 
 const auth = require("../../middleware/auth");
 
-const Order = require("../../models/Order");
 const Product = require("../../models/Product");
-const User = require("../../models/User");
 const Cart = require("../../models/Cart");
 
 // @route   PUT api/cart/:id
@@ -60,6 +57,28 @@ router.get("/", auth, async (req, res) => {
     if (!cart) {
       return res.status(400).json({ msg: "No cart found." });
     }
+
+    res.json(cart);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error.");
+  }
+});
+
+// @route   PUT api/cart
+// @desc    Remove item from cart
+// @access  Private
+router.put("/remove/:cart_id", auth, async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ user: req.user.id });
+
+    const removeIndex = cart.orders
+      .map((item) => item.id)
+      .indexOf(req.params.cart_id);
+
+    cart.orders.splice(removeIndex, 1);
+
+    await cart.save();
 
     res.json(cart);
   } catch (err) {

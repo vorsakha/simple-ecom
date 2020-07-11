@@ -6,5 +6,14 @@ import cart from "./cart";
 import contact from "./contact";
 import order from "./order";
 import product from "./product";
+import address from "./address";
 
-export default combineReducers({ auth, alert, cart, contact, order, product });
+export default combineReducers({
+  auth,
+  alert,
+  cart,
+  contact,
+  order,
+  product,
+  address,
+});

@@ -1,16 +1,14 @@
 import {
-  GET_ORDERS,
-  GET_ORDER,
-  ORDER_ERROR,
-  UPDATE_ORDER,
-  CLEAR_ORDER,
-  ADD_ORDER,
-  GET_ORDER_HISTORY,
+  GET_ADDRESSES,
+  GET_ADDRESS,
+  ADD_ADDRESS,
+  REMOVE_ADDRESS,
+  ADDRESS_ERROR,
 } from "../actions/types";
 
 const initialState = {
-  order: null,
-  orders: [],
+  addresses: [],
+  address: null,
   loading: true,
   error: {},
 };
@@ -19,39 +17,39 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_ORDER:
-    case UPDATE_ORDER:
+    case GET_ADDRESSES:
       return {
         ...state,
-        order: payload,
+        addresses: payload,
         loading: false,
       };
-    case GET_ORDER_HISTORY:
-    case GET_ORDERS:
+    case GET_ADDRESS:
       return {
         ...state,
-        orders: payload,
+        address: payload,
         loading: false,
       };
-    case ADD_ORDER:
+    case ADD_ADDRESS:
       return {
         ...state,
-        orders: [payload, ...state.orders], // post
+        contacts: [payload, ...state.contacts],
         loading: false,
       };
-    case ORDER_ERROR:
+    case REMOVE_ADDRESS:
+      return {
+        ...state,
+        contacts: state.contacts.filter((cont) => cont._id !== payload),
+        loading: false,
+      };
+    case ADDRESS_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
-        order: null,
-      };
-    case CLEAR_ORDER:
-      return {
-        ...state,
-        order: null,
       };
     default:
-      return state;
+      return {
+        state,
+      };
   }
 }

@@ -32,6 +32,7 @@
   font-size: 25px;
   color: #e63946;
   margin-left: 50px;
+  padding: 2px 18px 0 0;
 }
 
 .big-image-overlay > h3 {
@@ -44,4 +45,10 @@
 }
 
 .landing-items {
+}
+
+.image-a:hover {
+  color: var(--white);
+  background-color: var(--red);
+  border-radius: 3px;
 }

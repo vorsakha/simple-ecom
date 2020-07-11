@@ -38,3 +38,20 @@ export const addToCart = (id) => async (dispatch) => {
     });
   }
 };
+
+// Remove item from cart
+export const removeFromCart = (id) => async (dispatch) => {
+  try {
+    await axios.put(`/api/cart/remove/${id}`);
+
+    dispatch({
+      type: UPDATE_CART,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: CART_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};

@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_CART:
-    case UPDATE_CART: // put
+    case UPDATE_CART:
       return {
         ...state,
         cart: payload,

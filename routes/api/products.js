@@ -79,7 +79,7 @@ router.put(
 
       await product.save();
 
-      res.json(product.reviews);
+      res.json(product);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error.");
@@ -110,7 +110,7 @@ router.put("/rate/:id/:rate_id", auth, async (req, res) => {
 
     await product.save();
 
-    res.json(product.reviews);
+    res.json(product);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

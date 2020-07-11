@@ -120,7 +120,7 @@ export const getProductById = (id) => async (dispatch) => {
 };
 
 // Rate a product
-export const rateProduct = (formData, id, history) => async (dispatch) => {
+export const rateProduct = (id, formData, history) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -137,7 +137,7 @@ export const rateProduct = (formData, id, history) => async (dispatch) => {
 
     dispatch(setAlert("Rating added.", "success"));
 
-    history.push("/dashboard");
+    history.push("/");
   } catch (err) {
     dispatch({
       type: PRODUCT_ERROR,
