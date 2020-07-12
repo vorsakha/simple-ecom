@@ -10,6 +10,7 @@
 
 :root {
   --red: #e63946;
+  --light-red: #e44250;
   --blue: #1d3557;
   --white: white;
 }
@@ -33,31 +34,40 @@ h2 {
 
 .btn {
   font-size: 20px;
-  color: var(--red);
-  background-color: transparent;
+  color: var(--white);
+  background-color: var(--red);
   border: 0;
   cursor: pointer;
   margin-top: 10px;
-  text-decoration-line: underline;
+  margin-bottom: 10px;
+  text-decoration-line: none;
   width: 100px;
   align-self: center;
-  padding: 5px 15px 5px 5px;
+  padding: 10px;
   border-radius: 3px;
 }
 
 .btn:hover {
-  color: var(--white);
-  background-color: var(--red);
+  background-color: var(--light-red);
 }
 
 .btn-blue {
   color: var(--blue);
-  padding: 5px 15px 5px 5px;
+  padding: 5px;
   font-size: 16px;
   border-radius: 3px;
 }
 
 .btn-blue:hover {
-  color: var(--white);
-  background-color: var(--blue);
+  color: var(--red);
+}
+
+.danger {
+  transition: 0.3s background-color;
+  background-color: tomato;
+}
+
+.success {
+  transition: 0.3s background-color;
+  background-color: lightseagreen;
 }

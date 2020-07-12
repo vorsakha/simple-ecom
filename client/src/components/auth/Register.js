@@ -86,7 +86,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       </form>
       <p>
         Already have an account?{" "}
-        <Link className="btn btn-blue" to="/login">
+        <Link className="btn-blue" to="/login">
           Sign In
         </Link>
       </p>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createProduct } from "../../actions/product";
@@ -27,12 +26,12 @@ const CreateProduct = ({ createProduct }) => {
     description,
   } = formData;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createProduct(formData);
+    await createProduct(formData);
 
-    return <Redirect to="/super-dashboard" />;
+    window.location.reload();
   };
 
   const handleChange = (e) => {

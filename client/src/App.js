@@ -8,7 +8,7 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Contact from "./components/contact/Contact";
-import superDashboard from "./components/users/superDashboard";
+import SuperDashboard from "./components/users/SuperDashboard";
 import Dashboard from "./components/users/Dashboard";
 import CreateProduct from "./components/product/CreateProduct";
 import Alert from "./components/layout/Alert";
@@ -49,7 +49,7 @@ function App() {
             <SuperPrivateRoute
               exact
               path="/super-dashboard"
-              component={superDashboard}
+              component={SuperDashboard}
             />
             <SuperPrivateRoute
               exact

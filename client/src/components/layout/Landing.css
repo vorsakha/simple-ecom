@@ -32,7 +32,7 @@
   font-size: 25px;
   color: #e63946;
   margin-left: 50px;
-  padding: 2px 18px 0 0;
+  padding: 5px;
 }
 
 .big-image-overlay > h3 {
@@ -52,4 +52,5 @@
   color: var(--white);
   background-color: var(--red);
   border-radius: 3px;
+  text-decoration: none;
 }

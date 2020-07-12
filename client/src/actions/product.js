@@ -20,7 +20,6 @@ export const createProduct = (formData, history) => async (dispatch) => {
     };
 
     const res = await axios.post("/api/upload", formData, config);
-    console.log(res.data);
 
     dispatch({
       type: ADD_PRODUCT,
@@ -29,7 +28,7 @@ export const createProduct = (formData, history) => async (dispatch) => {
 
     dispatch(setAlert("Product created.", "success"));
 
-    history.push("/super-dashboard");
+    //history.push("/super-dashboard");
   } catch (err) {
     if (err.response) {
       const errors = err.response.data.errors;
