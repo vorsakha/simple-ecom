@@ -2,11 +2,11 @@ import axios from "axios";
 import { setAlert } from "./alert";
 
 import {
-  GET_CONTACT,
   GET_CONTACTS,
   ADD_CONTACT,
   REMOVE_CONTACT,
   CONTACT_ERROR,
+  CLEAR_CONTACT,
 } from "./types";
 
 // Get all contact messages (super)
@@ -16,23 +16,6 @@ export const getContacts = () => async (dispatch) => {
 
     dispatch({
       type: GET_CONTACTS,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: CONTACT_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Get message by id (super)
-export const getContactById = (id) => async (dispatch) => {
-  try {
-    const res = await axios.get(`/api/contact/${id}`);
-
-    dispatch({
-      type: GET_CONTACT,
       payload: res.data,
     });
   } catch (err) {
@@ -62,7 +45,7 @@ export const createContact = (formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: CONTACT_ERROR,
-      payload: { msg: err.response.status, status: err.response.status },
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -70,11 +53,11 @@ export const createContact = (formData) => async (dispatch) => {
 // Delete contact message by ID (super)
 export const deleteContact = (id) => async (dispatch) => {
   try {
-    await axios.delete(`/api/contact/${id}`);
+    const res = await axios.delete(`/api/contact/${id}`);
 
     dispatch({
       type: REMOVE_CONTACT,
-      payload: id,
+      payload: res.data,
     });
 
     dispatch(setAlert("Contact deleted", "success"));
@@ -84,4 +67,8 @@ export const deleteContact = (id) => async (dispatch) => {
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
+};
+
+export const clearContact = () => (dispatch) => {
+  dispatch({ type: CLEAR_CONTACT });
 };

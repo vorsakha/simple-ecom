@@ -1,10 +1,13 @@
 .alert {
-  top: 110px;
+  top: 120px;
   margin: 0 auto;
   width: 80%;
   position: absolute;
   padding: 10px;
   align-self: center;
+  color: white;
+  font-weight: bolder;
+  border-radius: 3px;
 }
 
 .alert-container {

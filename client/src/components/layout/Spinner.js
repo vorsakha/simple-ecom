@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import spinner from "../../images/suit-869380_1920 (1).jpg";
+import spinner from "../../images/spinner.gif";
 
 export default function () {
   return (

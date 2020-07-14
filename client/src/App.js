@@ -11,6 +11,7 @@ import Contact from "./components/contact/Contact";
 import SuperDashboard from "./components/users/SuperDashboard";
 import Dashboard from "./components/users/Dashboard";
 import CreateProduct from "./components/product/CreateProduct";
+import ProductsPage from "./components/product/ProductsPage";
 import Alert from "./components/layout/Alert";
 
 // Routing
@@ -45,6 +46,7 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/contact" component={Contact} />
+            <Route exact path="/products" component={ProductsPage} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <SuperPrivateRoute
               exact

@@ -1,19 +1,22 @@
 .super-dashboard {
   margin-top: 130px;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .info {
   width: 100vw;
-  height: 70vh;
-  padding: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .info > div {
-  width: 50%;
+  height: 300px;
   overflow: auto;
+  padding: 20px;
+  text-align: start;
 }
 
 .btn-large {
@@ -21,5 +24,31 @@
 }
 
 .first {
-  border-right: 1px solid var(--blue);
+  margin-top: 20px;
+}
+
+.second {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list > li {
+  margin: 10px;
+}
+
+.btn-icon {
+  background-color: transparent;
+  color: var(--red);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.btn-icon:hover {
+  color: var(--light-red);
 }

@@ -1,14 +1,13 @@
 import {
-  GET_CONTACT,
   GET_CONTACTS,
   ADD_CONTACT,
   REMOVE_CONTACT,
   CONTACT_ERROR,
+  CLEAR_CONTACT,
 } from "../actions/types";
 
 const initialState = {
-  contacts: [],
-  contact: null,
+  contacts: null,
   loading: true,
   error: {},
 };
@@ -23,22 +22,16 @@ export default function (state = initialState, action) {
         contacts: payload,
         loading: false,
       };
-    case GET_CONTACT:
-      return {
-        ...state,
-        contact: payload,
-        loading: false,
-      };
     case ADD_CONTACT:
       return {
         ...state,
-        contacts: [payload, ...state.contacts],
+        contacts: payload,
         loading: false,
       };
     case REMOVE_CONTACT:
       return {
         ...state,
-        contacts: state.contacts.filter((cont) => cont._id !== payload),
+        contacts: payload,
         loading: false,
       };
     case CONTACT_ERROR:
@@ -47,9 +40,12 @@ export default function (state = initialState, action) {
         error: payload,
         loading: false,
       };
-    default:
+    case CLEAR_CONTACT:
       return {
-        state,
+        ...state,
+        loading: true,
       };
+    default:
+      return state;
   }
 }

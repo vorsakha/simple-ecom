@@ -30,9 +30,9 @@
 .image-a {
   font-weight: lighter;
   font-size: 25px;
-  color: #e63946;
+  color: white;
   margin-left: 50px;
-  padding: 5px;
+  padding: 6px;
 }
 
 .big-image-overlay > h3 {
@@ -46,6 +46,12 @@
 
 .landing-items {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 1100px;
+  margin: 0 auto;
 }
 
 .image-a:hover {
@@ -53,4 +59,65 @@
   background-color: var(--red);
   border-radius: 3px;
   text-decoration: none;
+}
+
+.item {
+  width: 300px;
+  margin: 15px;
+}
+
+.item > img {
+  margin-bottom: 10px;
+}
+
+.item-link {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.item-link:hover {
+  color: var(--red);
+}
+
+.footer {
+  width: 1100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-bottom: 70px;
+}
+
+.f-item {
+  width: 30%;
+}
+
+.f-item > h3 {
+  font-weight: lighter;
+}
+
+.f-item > p {
+  text-align: center;
+}
+
+.newsletter > input {
+  width: 100%;
+}
+
+.newsletter > label {
+  padding: 10px;
+}
+
+.newsletter-btn {
+  width: 100%;
+  background-color: var(--red);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+.newsletter-btn:hover {
+  background-color: var(--light-red);
 }

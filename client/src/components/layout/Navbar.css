@@ -13,14 +13,37 @@ nav {
   padding-right: 20px;
   height: 80px;
   background-color: var(--white);
+  box-shadow: 0 8px 6px -6px var(--light-blue);
 }
 
 .menu-ul {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   list-style-type: none;
   align-items: center;
+  padding: 0;
+}
+
+.dropdown-content {
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  box-shadow: 0 2.8px 2.2px rgba(29, 53, 87, 0.034),
+    0 6.7px 5.3px rgba(29, 53, 87, 0.048), 0 12.5px 10px rgba(29, 53, 87, 0.06),
+    0 22.3px 17.9px rgba(29, 53, 87, 0.072),
+    0 41.8px 33.4px rgba(29, 53, 87, 0.086), 0 100px 80px rgba(29, 53, 87, 0.12);
+  text-align: center;
+}
+
+.dropdown-content li {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: var(--white);
+  display: none;
+}
+
+.menu-ul li:hover .dropdown-content > li {
+  display: block;
 }
 
 .mini-nav {
@@ -45,22 +68,40 @@ nav {
 }
 
 .log {
-  margin: 0 20px;
+  margin: 0 10px;
   text-decoration: none;
   padding: 5px;
   color: white;
   font-weight: bolder;
   letter-spacing: 1.7px;
   font-size: 14px;
+  transition: color 0.3s;
 }
 
 .menu-a {
   margin: 0 20px;
   text-decoration: none;
-  padding: 5px;
+  padding: 30px;
   color: var(--blue);
   font-weight: lighter;
   letter-spacing: 1.7px;
+  transition: color 0.3s;
+}
+
+.dropdown-btn {
+  margin: 0 20px;
+  padding: 25px;
+  color: var(--blue);
+  font-weight: lighter;
+  letter-spacing: 1.7px;
+  background-color: transparent;
+  border: 0;
+  transition: color 0.3s;
+  font-size: 16.5px;
+}
+
+.menu-a:hover {
+  color: var(--red);
 }
 
 .log:hover {

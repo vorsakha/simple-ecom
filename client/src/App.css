@@ -10,8 +10,9 @@
 
 :root {
   --red: #e63946;
-  --light-red: #e44250;
+  --light-red: #e44f5b;
   --blue: #1d3557;
+  --light-blue: rgba(29, 53, 87, 0.3);
   --white: white;
 }
 

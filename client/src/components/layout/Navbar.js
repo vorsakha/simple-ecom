@@ -1,15 +1,28 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
+import { sendId } from "../../actions/id";
 
 import "./Navbar.css";
 
 const Navbar = ({
   auth: { isAuthenticated, loading, user, isAdmin },
   logout,
+  product: { products },
+  sendId,
+  id: { id },
 }) => {
+  const [categories, setCategory] = useState(null);
+
+  useEffect(() => {
+    const unique = [...new Set(products.map((data) => data.category))];
+
+    products.length > 0 && setCategory(unique);
+  }, [products]);
+
   const authMiniLinks = (
     <ul className="menu-ul">
       <li>
@@ -67,9 +80,23 @@ const Navbar = ({
           </Link>
           <ul className="menu-ul">
             <li>
-              <Link className="menu-a" to="/shop">
-                SHOP
-              </Link>
+              <button className="dropdown-btn" type="button">
+                SHOP ⇂
+              </button>
+              <ul className="dropdown-content">
+                {categories !== null &&
+                  categories.map((data, k) => (
+                    <li key={k}>
+                      <Link
+                        className="menu-a"
+                        to="/products"
+                        onClick={() => sendId(data)}
+                      >
+                        {data}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
             </li>
             <li>
               <Link className="menu-a" to="/contact">
@@ -91,10 +118,17 @@ const Navbar = ({
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired,
+  sendId: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  product: state.product,
+  id: state.id,
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, {
+  logout,
+  sendId,
+})(Navbar);

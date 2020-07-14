@@ -6,23 +6,28 @@ import PropTypes from "prop-types";
 
 import "./Contact.css";
 
-const Contact = ({ setAlert, register, isAuthenticated }) => {
+import { createContact } from "../../actions/contact";
+
+const Contact = ({ createContact, contact: { loading } }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    text: "",
+    subject: "",
   });
 
-  const { name, email, message } = formData;
+  const { name, email, text, subject } = formData;
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    createContact(formData);
   };
 
-  if (isAuthenticated) return <Redirect to={"/dashboard"} />;
+  if (!loading) return <Redirect to="/" />;
 
   return (
     <div className="form-container">
@@ -30,11 +35,7 @@ const Contact = ({ setAlert, register, isAuthenticated }) => {
       <p className="lead">
         <i className="fas fa-envelope"></i> Create a contact message
       </p>
-      <form
-        className="form"
-        action="create-profile.html"
-        onSubmit={(e) => handleSubmit(e)}
-      >
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <div className="form-group">
           <input
             type="text"
@@ -42,6 +43,16 @@ const Contact = ({ setAlert, register, isAuthenticated }) => {
             name="name"
             required
             value={name}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Subject"
+            name="subject"
+            required
+            value={subject}
             onChange={(e) => handleChange(e)}
           />
         </div>
@@ -59,14 +70,14 @@ const Contact = ({ setAlert, register, isAuthenticated }) => {
           <textarea
             className="message"
             placeholder="Create a message with 300 or less characters."
-            name="message"
+            name="text"
             minLength="6"
             maxLength="300"
-            value={message}
+            value={text}
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <input type="submit" className="btn" value="Register" />
+        <input type="submit" className="btn" />
       </form>
     </div>
   );
@@ -74,10 +85,14 @@ const Contact = ({ setAlert, register, isAuthenticated }) => {
 
 Contact.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  createContact: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  contact: state.contact,
+});
 
 export default connect(mapStateToProps, {
   setAlert,
+  createContact,
 })(Contact);
