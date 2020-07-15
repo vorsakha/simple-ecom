@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Fade } from "react-awesome-reveal";
 
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
@@ -13,7 +14,6 @@ const Navbar = ({
   logout,
   product: { products },
   sendId,
-  id: { id },
 }) => {
   const [categories, setCategory] = useState(null);
 
@@ -83,20 +83,22 @@ const Navbar = ({
               <button className="dropdown-btn" type="button">
                 SHOP ⇂
               </button>
-              <ul className="dropdown-content">
-                {categories !== null &&
-                  categories.map((data, k) => (
-                    <li key={k}>
-                      <Link
-                        className="menu-a"
-                        to="/products"
-                        onClick={() => sendId(data)}
-                      >
-                        {data}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
+              <Fade duration={300}>
+                <ul className="dropdown-content">
+                  {categories !== null &&
+                    categories.map((data, k) => (
+                      <li key={k}>
+                        <Link
+                          className="menu-a"
+                          to="/products"
+                          onClick={() => sendId(data)}
+                        >
+                          {data}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </Fade>
             </li>
             <li>
               <Link className="menu-a" to="/contact">
@@ -125,7 +127,6 @@ Navbar.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   product: state.product,
-  id: state.id,
 });
 
 export default connect(mapStateToProps, {

@@ -27,27 +27,6 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// @route   GET api/contact/:id
-// @desc    Get contact message by id (SUPER)
-// @access  Private
-router.get("/:id", auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-
-    if (!user.isAdmin) {
-      console.log(user.isAdmin);
-      return res.status(401).json({ msg: "User not authorized." });
-    }
-
-    const contact = await Contact.findById(req.params.id);
-
-    res.json(contact);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error.");
-  }
-});
-
 // @route   POST api/contact
 // @desc    Create contact message
 // @access  Private
@@ -67,19 +46,31 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const message = {
+    const newMessage = {
       name: req.body.name,
       subject: req.body.subject,
       text: req.body.text,
-      email: req.body.email,
     };
 
     try {
-      const contact = new Contact(message);
+      let contact = await Contact.findOne({ email: req.body.email });
 
-      await contact.save();
+      if (contact) {
+        contact.message.unshift(newMessage);
 
-      res.json(contact);
+        await contact.save();
+
+        return res.json(contact);
+      }
+
+      const newContact = new Contact({
+        email: req.body.email,
+        message: newMessage,
+      });
+
+      await newContact.save();
+
+      res.json(newContact);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error.");
@@ -98,11 +89,11 @@ router.delete("/:id", auth, async (req, res) => {
       return res.status(401).json({ msg: "User not authorized." });
     }
 
-    const message = await Contact.findById(req.params.id);
+    const contact = await Contact.findById(req.params.id);
+    await contact.remove();
 
-    await message.remove();
-
-    res.json({ msg: "Message removed." });
+    const contacts = await Contact.find().sort({ date: -1 });
+    res.json(contacts);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error.");

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Fade } from "react-awesome-reveal";
 
 import "./ProductsPage.css";
 
@@ -18,10 +19,6 @@ const ProductsPage = ({
 }) => {
   const [arr, setArr] = useState([]);
 
-  //   useEffect(() => {
-  //     clearId();
-  //   }, [clearId]);
-
   useEffect(() => {
     getAllProducts();
   }, [getAllProducts]);
@@ -29,7 +26,7 @@ const ProductsPage = ({
   useEffect(() => {
     products.map(
       (data) => data.category === id.toString() && setArr([...arr, data])
-    );
+    ); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   console.log(arr);
@@ -38,9 +35,24 @@ const ProductsPage = ({
 
   return (
     <div className="product-page">
+      <h2 style={{ width: "100%" }}>Category: {id}</h2>
       {products !== null ? (
         products.map(
-          (data) => data.category === id.toString() && <h3>{data.name}</h3>
+          (data, k) =>
+            data.category === id.toString() && (
+              <Fade triggerOnce duration={300}>
+                <div className="item" key={k}>
+                  <Link to="/">
+                    <img src={data.image} alt={data.name} />
+                  </Link>
+                  <small>{data.brand}</small>
+                  <Link className="item-link" to="/">
+                    <h4>{data.name}</h4>
+                  </Link>
+                  <p>${data.price}</p>
+                </div>
+              </Fade>
+            )
         )
       ) : (
         <Spinner />
