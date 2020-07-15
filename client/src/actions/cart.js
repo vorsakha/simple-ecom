@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
-import { GET_CART, UPDATE_CART, CLEAR_CART, CART_ERROR } from "./types";
+import { GET_CART, UPDATE_CART, CART_ERROR } from "./types";
 
 // Get current user cart
 export const getCurrentCart = () => async (dispatch) => {
@@ -21,9 +21,15 @@ export const getCurrentCart = () => async (dispatch) => {
 };
 
 // Add to cart
-export const addToCart = (id) => async (dispatch) => {
+export const addToCart = (id, quantity) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
   try {
-    const res = await axios.put(`/api/cart/${id}`);
+    const res = await axios.put(`/api/cart/${id}`, quantity, config);
 
     dispatch({
       type: UPDATE_CART,
@@ -42,7 +48,7 @@ export const addToCart = (id) => async (dispatch) => {
 // Remove item from cart
 export const removeFromCart = (id) => async (dispatch) => {
   try {
-    await axios.put(`/api/cart/remove/${id}`);
+    const res = await axios.put(`/api/cart/remove/${id}`);
 
     dispatch({
       type: UPDATE_CART,

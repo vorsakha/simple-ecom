@@ -5,7 +5,6 @@ import { Fade } from "react-awesome-reveal";
 
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
-import { sendId } from "../../actions/id";
 
 import "./Navbar.css";
 
@@ -13,7 +12,6 @@ const Navbar = ({
   auth: { isAuthenticated, loading, user, isAdmin },
   logout,
   product: { products },
-  sendId,
 }) => {
   const [categories, setCategory] = useState(null);
 
@@ -88,11 +86,7 @@ const Navbar = ({
                   {categories !== null &&
                     categories.map((data, k) => (
                       <li key={k}>
-                        <Link
-                          className="menu-a"
-                          to="/products"
-                          onClick={() => sendId(data)}
-                        >
+                        <Link className="menu-a" to={`/products/${data}`}>
                           {data}
                         </Link>
                       </li>
@@ -121,7 +115,6 @@ Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   product: PropTypes.object.isRequired,
-  sendId: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -131,5 +124,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   logout,
-  sendId,
 })(Navbar);

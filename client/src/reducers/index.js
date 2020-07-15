@@ -7,7 +7,6 @@ import contact from "./contact";
 import order from "./order";
 import product from "./product";
 import address from "./address";
-import id from "./id";
 
 export default combineReducers({
   auth,
@@ -17,5 +16,4 @@ export default combineReducers({
   order,
   product,
   address,
-  id,
 });

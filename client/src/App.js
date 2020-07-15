@@ -12,6 +12,7 @@ import SuperDashboard from "./components/users/SuperDashboard";
 import Dashboard from "./components/users/Dashboard";
 import CreateProduct from "./components/product/CreateProduct";
 import ProductsPage from "./components/product/ProductsPage";
+import Product from "./components/product/Product";
 import Alert from "./components/layout/Alert";
 
 // Routing
@@ -43,11 +44,12 @@ function App() {
           </div>
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/products/:id" component={ProductsPage} />
+            <Route exact path="/product/:id" component={Product} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/contact" component={Contact} />
-            <Route exact path="/products" component={ProductsPage} />
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <SuperPrivateRoute
               exact
               path="/super-dashboard"
