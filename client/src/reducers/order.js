@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
     case ADD_ORDER:
       return {
         ...state,
-        orders: [payload, ...state.orders], // post
+        orders: payload, // post
         loading: false,
       };
     case ORDER_ERROR:

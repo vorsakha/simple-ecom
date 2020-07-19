@@ -9,14 +9,14 @@ const Address = require("../../models/Address");
 // @route   POST api/address
 // @desc    Add address
 // @access  Private
-router.put(
+router.post(
   "/",
   [
     auth,
     [
       check("address", "Address is required.").not().isEmpty(),
       check("city", "City is required.").not().isEmpty(),
-      check("postalCode", "Input a valid Postal Code").isPostalCode("any"),
+      //check("postalCode", "Input a valid Postal Code").isPostalCode("any"),
       check("country", "Country is required.").not().isEmpty(),
     ],
   ],
@@ -41,7 +41,7 @@ router.put(
 
       await address.save();
 
-      res.json(address);
+      res.json(address.shipping);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error.");
@@ -64,7 +64,7 @@ router.get("/", auth, async (req, res) => {
         .json({ msg: "There is no address form this user." });
     }
 
-    res.json(address);
+    res.json(address.shipping);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error.");
@@ -102,9 +102,9 @@ router.put("/remove/:id", auth, async (req, res) => {
 
     address.shipping.splice(removeIndex, 1);
 
-    await cart.save();
+    await address.save();
 
-    res.json(cart);
+    res.json(address.shipping);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error.");

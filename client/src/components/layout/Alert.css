@@ -9,6 +9,7 @@
   font-weight: bolder;
   border-radius: 3px;
   z-index: 1;
+  position: fixed;
 }
 
 .alert-container {

@@ -1,0 +1,51 @@
+.dashboard > div {
+  width: 45%;
+  height: 350px;
+  margin: 0 auto;
+}
+
+.dashboard > h1 {
+  width: 100%;
+}
+
+hr {
+  width: 100%;
+  border-top: 1px solid var(--blue);
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.dash-title {
+  text-align: start;
+}
+
+.link {
+  color: var(--blue);
+  transition: color 0.3s;
+  background-color: transparent;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.link:hover {
+  color: var(--red);
+}
+
+.limit-char {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.address-li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.address-btn {
+  width: 60%;
+}

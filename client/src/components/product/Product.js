@@ -27,6 +27,10 @@ const Product = ({
     getProductById(match.params.id);
   }, [getProductById, match.params.id]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleBuy = (e) => {
     !isAuthenticated && setRedirect(true);
 

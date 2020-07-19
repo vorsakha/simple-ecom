@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Fade } from "react-awesome-reveal";
 
@@ -13,6 +13,7 @@ import Footer from "../layout/Footer";
 
 const ProductsPage = ({ getAllProducts, product: { products }, match }) => {
   const [arr, setArr] = useState([]);
+  //const [loading, setLoading] = useState(null);
 
   useEffect(() => {
     getAllProducts();
@@ -25,9 +26,11 @@ const ProductsPage = ({ getAllProducts, product: { products }, match }) => {
     ); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.id]);
 
-  console.log(arr);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  if (match.params.id === null) return <Redirect to="/" />;
+  //if (!loading && arr.length === 0) return <Redirect to="/" />;
 
   return (
     <div className="products-page">

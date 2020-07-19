@@ -13,7 +13,7 @@ const Cart = require("../../models/Cart");
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
-    const orderHistory = await Order.findOne({
+    const orderHistory = await Order.find({
       user: req.user.id,
     });
 

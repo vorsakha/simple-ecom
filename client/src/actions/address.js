@@ -52,7 +52,7 @@ export const createAddress = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.put("/api/address", formData, config);
+    const res = await axios.post("/api/address", formData, config);
 
     dispatch({
       type: ADD_ADDRESS,
@@ -65,13 +65,14 @@ export const createAddress = (formData) => async (dispatch) => {
       type: ADDRESS_ERROR,
       payload: { msg: err.response.status, status: err.response.status },
     });
+    dispatch(setAlert("Address error.", "danger"));
   }
 };
 
 // Remove address by ID
 export const removeAddress = (id) => async (dispatch) => {
   try {
-    await axios.put(`/api/address/remove/${id}`);
+    const res = await axios.put(`/api/address/remove/${id}`);
 
     dispatch({
       type: UPDATE_ADDRESS,

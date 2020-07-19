@@ -99,6 +99,24 @@ nav {
   border: 0;
   transition: color 0.3s;
   font-size: 16.5px;
+  cursor: pointer;
+}
+
+.cart-btn {
+  margin: 0 10px;
+  padding: 28px 15px;
+  color: var(--blue);
+  font-weight: lighter;
+  letter-spacing: 1.7px;
+  background-color: transparent;
+  border: 0;
+  transition: color 0.3s;
+  font-size: 16.5px;
+  cursor: pointer;
+}
+
+.cart-btn:hover {
+  color: var(--red);
 }
 
 .menu-a:hover {

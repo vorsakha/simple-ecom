@@ -51,7 +51,7 @@ const SuperDashboard = ({
   console.log(orders);
 
   return (
-    <div className="super-dashboard">
+    <div className="dashboard">
       <Fade duration={300}>
         <div>
           <Link to="/create-product" className="btn btn-large">

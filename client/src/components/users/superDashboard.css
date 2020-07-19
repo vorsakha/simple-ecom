@@ -1,7 +1,13 @@
-.super-dashboard {
-  margin-top: 130px;
+.dashboard {
+  margin-top: 150px;
   text-align: center;
   margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1100px;
+  margin: 150px auto 50px auto;
+  padding: 10px;
 }
 
 .info {
@@ -24,7 +30,6 @@
 }
 
 .first {
-  margin-top: 20px;
 }
 
 .second {

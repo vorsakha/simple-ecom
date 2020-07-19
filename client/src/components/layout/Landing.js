@@ -25,7 +25,9 @@ const Landing = ({
     clearContact();
   }, [clearContact]);
 
-  console.log(products);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Fragment>

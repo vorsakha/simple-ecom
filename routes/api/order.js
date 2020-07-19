@@ -18,7 +18,7 @@ router.post(
     [
       check("address", "Address is required.").not().isEmpty(),
       check("city", "City is required.").not().isEmpty(),
-      check("postalCode", "Postal Code is required.").isPostalCode("any"),
+      //check("postalCode", "Postal Code is required.").isPostalCode("any"),
       check("country", "Country  is required.").not().isEmpty(),
       check("paymentMethod", "Payment Method is required.").not().isEmpty(),
     ],
@@ -74,7 +74,11 @@ router.post(
       } while (cart.orders.length > 0);
       await cart.save();
 
-      res.json(cart.orders);
+      const orderHistory = await Order.find({
+        user: req.user.id,
+      });
+
+      res.json(orderHistory);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error.");

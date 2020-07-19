@@ -92,6 +92,8 @@ export const orderItems = (formData) => async (dispatch) => {
       type: ADD_ORDER,
       payload: res.data,
     });
+
+    dispatch(setAlert("Items ordered, Thank You!", "success"));
   } catch (err) {
     dispatch({
       type: ORDER_ERROR,

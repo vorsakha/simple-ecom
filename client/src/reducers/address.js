@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  addresses: [],
+  addresses: null,
   address: null,
   loading: true,
   error: {},
@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
     case ADD_ADDRESS:
       return {
         ...state,
-        contacts: [payload, ...state.contacts],
+        addresses: payload,
         loading: false,
       };
     case ADDRESS_ERROR:

@@ -5,6 +5,7 @@ import { Fade } from "react-awesome-reveal";
 
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
+import { setIsOpen } from "../../actions/modal";
 
 import "./Navbar.css";
 
@@ -12,6 +13,7 @@ const Navbar = ({
   auth: { isAuthenticated, loading, user, isAdmin },
   logout,
   product: { products },
+  setIsOpen,
 }) => {
   const [categories, setCategory] = useState(null);
 
@@ -100,9 +102,9 @@ const Navbar = ({
               </Link>
             </li>
             <li>
-              <Link className="menu-a" to="/cart">
+              <button className="cart-btn" onClick={() => setIsOpen()}>
                 CART
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
@@ -115,6 +117,7 @@ Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   product: PropTypes.object.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -124,4 +127,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   logout,
+  setIsOpen,
 })(Navbar);
