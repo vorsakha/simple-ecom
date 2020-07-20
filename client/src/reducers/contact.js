@@ -1,4 +1,5 @@
 import {
+  GET_CONTACT,
   GET_CONTACTS,
   ADD_CONTACT,
   REMOVE_CONTACT,
@@ -8,6 +9,7 @@ import {
 
 const initialState = {
   contacts: null,
+  contact: null,
   loading: true,
   error: {},
 };
@@ -16,6 +18,12 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case GET_CONTACT:
+      return {
+        ...state,
+        contact: payload,
+        loading: false,
+      };
     case GET_CONTACTS:
       return {
         ...state,

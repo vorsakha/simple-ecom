@@ -7,6 +7,7 @@ import {
   REMOVE_CONTACT,
   CONTACT_ERROR,
   CLEAR_CONTACT,
+  GET_CONTACT,
 } from "./types";
 
 // Get all contact messages (super)
@@ -16,6 +17,23 @@ export const getContacts = () => async (dispatch) => {
 
     dispatch({
       type: GET_CONTACTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: CONTACT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get contact messages by id (super)
+export const getContact = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/contact/${id}`);
+
+    dispatch({
+      type: GET_CONTACT,
       payload: res.data,
     });
   } catch (err) {

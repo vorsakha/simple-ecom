@@ -11,6 +11,7 @@
 .cart {
   width: 100%;
   min-width: 400px;
+  min-height: 200px;
   background-color: var(--white);
   box-shadow: 0 2.8px 2.2px rgba(29, 53, 87, 0.034),
     0 6.7px 5.3px rgba(29, 53, 87, 0.048), 0 12.5px 10px rgba(29, 53, 87, 0.06),

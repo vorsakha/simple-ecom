@@ -1,0 +1,23 @@
+.edit-product {
+  width: 100%;
+  height: 100%;
+  background-color: var(--white);
+  padding: 10px;
+  box-shadow: 0 2.8px 2.2px rgba(29, 53, 87, 0.034),
+    0 6.7px 5.3px rgba(29, 53, 87, 0.048), 0 12.5px 10px rgba(29, 53, 87, 0.06),
+    0 22.3px 17.9px rgba(29, 53, 87, 0.072),
+    0 41.8px 33.4px rgba(145, 153, 165, 0.086),
+    0 100px 80px rgba(29, 53, 87, 0.12);
+  border-radius: 3px;
+}
+
+.edit-modal {
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  border: 0;
+  overflow: auto;
+}

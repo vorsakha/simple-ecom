@@ -70,15 +70,18 @@ router.patch("/:id", auth, async (req, res) => {
       paidAt: req.body.paidAt,
       isDelivered: req.body.isDelivered,
       deliveredAt: req.body.deliveredAt,
+      status: req.body.status,
     };
 
-    const updateOrder = await Order.findOneAndUpdate(
+    await Order.findOneAndUpdate(
       { _id: req.params.id },
       { $set: update },
       { new: true }
     );
 
-    res.json(updateOrder);
+    const orders = await Order.find();
+
+    res.json(orders);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error.");

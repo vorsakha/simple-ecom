@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Fade } from "react-awesome-reveal";
 
@@ -8,8 +8,17 @@ import { orderItems } from "../../actions/order";
 import { getCurrentCart } from "../../actions/cart";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { getAddresses, getAddressById } from "../../actions/address";
 
-const Order = ({ match, orderItems, cart: { cart }, getCurrentCart }) => {
+const Order = ({
+  match,
+  orderItems,
+  cart: { cart },
+  getCurrentCart,
+  getAddresses,
+  getAddressById,
+  address: { addresses, selectedAddress },
+}) => {
   const [formData, setFormData] = useState({
     address: "",
     city: "",
@@ -18,6 +27,20 @@ const Order = ({ match, orderItems, cart: { cart }, getCurrentCart }) => {
     paymentMethod: "",
   });
   const { address, city, postalCode, country, paymentMethod } = formData;
+
+  useEffect(() => {
+    getAddresses();
+  }, [getAddresses]);
+
+  useEffect(() => {
+    selectedAddress !== null &&
+      setFormData({
+        address: selectedAddress.address,
+        city: selectedAddress.city,
+        postalCode: selectedAddress.postalCode,
+        country: selectedAddress.postalCode,
+      });
+  }, [selectedAddress]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +54,13 @@ const Order = ({ match, orderItems, cart: { cart }, getCurrentCart }) => {
     getCurrentCart();
   };
 
+  const handleSelect = async (e) => {
+    await getAddressById(e.target.value);
+  };
+
   if (cart === null || cart.orders.length === 0) return <Redirect to="/" />;
+
+  console.log(formData);
 
   return (
     <Fade duration={300}>
@@ -41,6 +70,23 @@ const Order = ({ match, orderItems, cart: { cart }, getCurrentCart }) => {
           <p style={{ textAlign: "center" }}>
             <i className="fas fa-address-card"></i> Add information
           </p>
+          <div className="form-group">
+            <select
+              id="cars"
+              defaultValue="select"
+              onChange={(e) => handleSelect(e)}
+            >
+              <option disabled value="select">
+                Select Saved Address
+              </option>
+              {addresses !== null &&
+                addresses.map((data, k) => (
+                  <option key={k} value={data._id}>
+                    {data.address}
+                  </option>
+                ))}
+            </select>
+          </div>
           <div className="form-group">
             <input
               type="text"
@@ -102,10 +148,19 @@ Order.propTypes = {
   orderItems: PropTypes.func.isRequired,
   getCurrentCart: PropTypes.func.isRequired,
   cart: PropTypes.object.isRequired,
+  getAddresses: PropTypes.func.isRequired,
+  address: PropTypes.object.isRequired,
+  getAddressById: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   cart: state.cart,
+  address: state.address,
 });
 
-export default connect(mapStateToProps, { orderItems, getCurrentCart })(Order);
+export default connect(mapStateToProps, {
+  orderItems,
+  getCurrentCart,
+  getAddresses,
+  getAddressById,
+})(Order);

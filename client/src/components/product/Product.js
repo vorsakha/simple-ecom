@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Fade } from "react-awesome-reveal";
@@ -7,18 +7,22 @@ import "./Product.css";
 
 import Spinner from "../layout/Spinner";
 import Footer from "../layout/Footer";
+import EditProduct from "./EditProduct";
 
 import { connect } from "react-redux";
 import { getProductById } from "../../actions/product";
 import { addToCart } from "../../actions/cart";
+import { setEditOpen } from "../../actions/modal";
 
 const Product = ({
+  auth: { isAdmin },
   getProductById,
   product: { product },
   match,
   isAuthenticated,
   addToCart,
-  cart: { loading },
+  setEditOpen,
+  modal: { editProductOpen },
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -43,10 +47,9 @@ const Product = ({
 
   if (redirect) return <Redirect to="/login" />;
 
-  console.log();
-
   return (
-    <Fade duration={300}>
+    <Fragment>
+      {/* <Fade duration={300}> */}
       {product === null ? (
         <Spinner />
       ) : (
@@ -55,6 +58,18 @@ const Product = ({
             <img src={product.image} alt={product.name} />
           </div>
           <div className="product-info">
+            {isAdmin && (
+              <Fragment>
+                <button
+                  type="button"
+                  className="btn-icon"
+                  onClick={() => setEditOpen()}
+                >
+                  <i className="fas fa-edit color-success"></i>
+                </button>
+                <br />
+              </Fragment>
+            )}
             <small>{product.brand}</small>
             <h2>{product.name}</h2>
             <p>{product.description}</p>
@@ -82,7 +97,9 @@ const Product = ({
         </div>
       )}
       <Footer />
-    </Fade>
+      {editProductOpen && <EditProduct id={match.params.id} />}
+      {/* </Fade> */}
+    </Fragment>
   );
 };
 
@@ -91,13 +108,20 @@ Product.propTypes = {
   getProductById: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
   addToCart: PropTypes.func.isRequired,
-  cart: PropTypes.object.isRequired,
+  setEditOpen: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  modal: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   product: state.product,
   isAuthenticated: state.auth.isAuthenticated,
-  cart: state.cart,
+  auth: state.auth,
+  modal: state.modal,
 });
 
-export default connect(mapStateToProps, { getProductById, addToCart })(Product);
+export default connect(mapStateToProps, {
+  getProductById,
+  addToCart,
+  setEditOpen,
+})(Product);

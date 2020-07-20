@@ -27,6 +27,7 @@ import { connect } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
+import ContactMessage from "./components/contact/ContactMessage";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -62,6 +63,11 @@ function App({ modal: { modalIsOpen } }) {
             exact
             path="/create-product"
             component={CreateProduct}
+          />
+          <SuperPrivateRoute
+            exact
+            path="/message/:id"
+            component={ContactMessage}
           />
         </Switch>
         {modalIsOpen && <Cart />}

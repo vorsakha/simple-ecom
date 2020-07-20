@@ -10,31 +10,18 @@
   padding: 10px;
 }
 
-.info {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
+.content {
+  max-height: 250px;
+  overflow: auto;
+  text-align: start;
 }
 
-.info > div {
-  height: 300px;
-  overflow: auto;
-  padding: 20px;
-  text-align: start;
+.super-container {
+  width: 100%;
 }
 
 .btn-large {
   width: 300px;
-}
-
-.first {
-}
-
-.second {
-  background-color: var(--blue);
-  color: var(--white);
 }
 
 .list {

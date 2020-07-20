@@ -4,6 +4,10 @@ import {
   GET_MODAL,
   CLEAR_MODAL,
   MODAL_ERROR,
+  MODAL_MESSAGE,
+  MODAL_ORDER,
+  CLEAR_BUG,
+  MODAL_EDIT,
 } from "./types";
 
 export const setIsOpen = () => (dispatch) => {
@@ -23,6 +27,9 @@ export const setIsClosed = () => (dispatch) => {
   try {
     dispatch({
       type: CLEAR_MODAL,
+    });
+    dispatch({
+      type: CLEAR_BUG,
     });
   } catch (err) {
     dispatch({
@@ -50,6 +57,45 @@ export const setAddressOpen = () => (dispatch) => {
   try {
     dispatch({
       type: MODAL_ADDRESS,
+    });
+  } catch (err) {
+    dispatch({
+      type: MODAL_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const setMessageOpen = () => (dispatch) => {
+  try {
+    dispatch({
+      type: MODAL_MESSAGE,
+    });
+  } catch (err) {
+    dispatch({
+      type: MODAL_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const setOrderOpen = () => (dispatch) => {
+  try {
+    dispatch({
+      type: MODAL_ORDER,
+    });
+  } catch (err) {
+    dispatch({
+      type: MODAL_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const setEditOpen = () => (dispatch) => {
+  try {
+    dispatch({
+      type: MODAL_EDIT,
     });
   } catch (err) {
     dispatch({

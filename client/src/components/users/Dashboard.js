@@ -31,74 +31,79 @@ const Dashboard = ({
     getAddresses();
   }, [getAddresses]);
 
-  addresses !== null && console.log(addresses);
-
   return (
     <Fragment>
       <div className="dashboard">
         <h1>My Account</h1>
-        <div className="first">
+        <div className="first dash-container">
           <h3 className="dash-title">
             <i className="fas fa-shopping-bag"></i> Order History
           </h3>
           <hr />
-          <ul className="list">
-            {orders === null ? (
-              <Spinner />
-            ) : orders.length === 0 ? (
-              <p>No order</p>
-            ) : (
-              orders.map((data, k) => (
-                <li key={k} style={{ textAlign: "start" }}>
-                  <button
-                    className="link"
-                    href=""
-                    onClick={() => setHistoryOpen(data._id)}
-                  >
-                    See details
-                  </button>{" "}
-                  ${data.items.totalPrice}
-                </li>
-              ))
-            )}
-          </ul>
+          <div className="content">
+            <ul className="list">
+              {orders === null ? (
+                <Spinner />
+              ) : orders.length === 0 ? (
+                <p>No order</p>
+              ) : (
+                orders.map((data, k) => (
+                  <li key={k} style={{ textAlign: "start" }}>
+                    <button
+                      className="link"
+                      href=""
+                      onClick={() => setHistoryOpen(data._id)}
+                    >
+                      See details
+                    </button>{" "}
+                    ${data.items.totalPrice}
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
         </div>
-        <div>
+        <div className="dash-container">
           <h3 className="dash-title">
             <i className="fas fa-address-card"></i> My Addresses
           </h3>
           <hr />
-          <ul className="list">
-            {addresses === null ? (
-              <Spinner />
-            ) : addresses.length === 0 ? (
-              <p>No address saved.</p>
-            ) : (
-              addresses.map((data, k) => (
-                <li
-                  className="address-li"
-                  key={k}
-                  style={{ textAlign: "start" }}
-                >
-                  <p className="limit-char">{data.address}</p>
-                  <button
-                    className="btn-icon"
-                    onClick={() => removeAddress(data._id)}
-                    type="button"
+          <div className="content">
+            <ul className="list">
+              {addresses === null ? (
+                <Spinner />
+              ) : addresses.length === 0 ? (
+                <p>No address saved.</p>
+              ) : (
+                addresses.map((data, k) => (
+                  <li
+                    className="address-li"
+                    key={k}
+                    style={{ textAlign: "start" }}
                   >
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
-                </li>
-              ))
-            )}
-          </ul>
-          <button
-            className="btn address-btn"
-            type="button"
-            onClick={() => setAddressOpen()}
-          >
-            Add Address
-          </button>
+                    <p className="limit-char">{data.address}</p>
+                    <button
+                      className="btn-icon"
+                      onClick={() => removeAddress(data._id)}
+                      type="button"
+                    >
+                      <i className="fas fa-trash-alt"></i>
+                    </button>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+          <div className="dash-btn">
+            {" "}
+            <button
+              className="btn address-btn"
+              type="button"
+              onClick={() => setAddressOpen()}
+            >
+              Add Address
+            </button>
+          </div>
         </div>
       </div>
       <Footer />

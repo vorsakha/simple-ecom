@@ -11,6 +11,7 @@ import {
   ACCOUNT_DELETED,
   CLEAR_ORDER,
   SUPER_USER_LOADED,
+  CLEAR_ADDRESS,
 } from "../actions/types";
 import { setAlert } from "./alert";
 import setAuthToken from "../utils/setAuthToken";
@@ -109,6 +110,8 @@ export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
   dispatch({ type: CLEAR_CART });
   dispatch({ type: CLEAR_ORDER });
+  dispatch({ type: CLEAR_ADDRESS });
+  dispatch(setAlert("Logout successful.", "success"));
 };
 
 // Delete account

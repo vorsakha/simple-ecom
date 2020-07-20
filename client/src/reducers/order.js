@@ -6,6 +6,7 @@ import {
   CLEAR_ORDER,
   ADD_ORDER,
   GET_ORDER_HISTORY,
+  CLEAR_BUG,
 } from "../actions/types";
 
 const initialState = {
@@ -47,6 +48,13 @@ export default function (state = initialState, action) {
         order: null,
       };
     case CLEAR_ORDER:
+      return {
+        ...state,
+        order: null,
+        orders: [],
+        loading: true,
+      };
+    case CLEAR_BUG:
       return {
         ...state,
         order: null,

@@ -16,3 +16,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.danger {
+  transition: 0.3s background-color;
+  background-color: tomato;
+}
+
+.success {
+  transition: 0.3s background-color;
+  background-color: lightseagreen;
+}

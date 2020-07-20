@@ -27,6 +27,26 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// @route   GET api/contact/:id
+// @desc    Get contact messages by ID (SUPER)
+// @access  Private
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user.isAdmin) {
+      return res.status(401).json({ msg: "User not authorized." });
+    }
+
+    const contact = await Contact.findById(req.params.id);
+
+    res.json(contact);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error.");
+  }
+});
+
 // @route   POST api/contact
 // @desc    Create contact message
 // @access  Private
