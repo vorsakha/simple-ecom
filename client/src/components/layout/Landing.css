@@ -101,8 +101,14 @@
   text-align: center;
 }
 
+.newsletter {
+  display: flex;
+  flex-direction: column;
+}
+
 .newsletter > input {
   width: 100%;
+  margin: 0 auto;
 }
 
 .newsletter > label {
@@ -110,13 +116,14 @@
 }
 
 .newsletter-btn {
-  width: 100%;
+  width: 400px;
   background-color: var(--red);
   border: none;
   padding: 10px;
   cursor: pointer;
   font-weight: bold;
   color: white;
+  margin: 0 auto;
 }
 
 .newsletter-btn:hover {

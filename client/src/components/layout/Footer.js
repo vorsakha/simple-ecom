@@ -35,7 +35,11 @@ const Footer = () => {
         <hr />
         <p>Join our mailing list</p>
         <form className="form-group newsletter">
-          <input type="email" placeholder="your@email.com"></input>
+          <input
+            type="email"
+            className="f-input"
+            placeholder="your@email.com"
+          ></input>
           <button type="submit" className="newsletter-btn">
             Subscribe
           </button>

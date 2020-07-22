@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Fade } from "react-awesome-reveal";
@@ -8,6 +8,7 @@ import { logout } from "../../actions/auth";
 import { setIsOpen } from "../../actions/modal";
 
 import "./Navbar.css";
+import useOutside from "../../utils/useOutside";
 
 const Navbar = ({
   auth: { isAuthenticated, loading, user, isAdmin },
@@ -24,6 +25,13 @@ const Navbar = ({
 
     products.length > 0 && setCategory(unique);
   }, [products]);
+
+  const ref = useRef();
+
+  useOutside(ref, () => {
+    setToggle(false);
+    setToggleShop(false);
+  });
 
   const authMiniLinks = (
     <ul className="mini">
@@ -145,7 +153,7 @@ const Navbar = ({
 
   return (
     <Fragment>
-      <nav>
+      <nav ref={ref}>
         <div className="mini-nav">
           {!loading && (
             <Fragment>
