@@ -64,6 +64,7 @@ const OrderDetails = ({
                 <h3>Payment method</h3>
                 <hr />
                 <p>{obj.payment.paymentMethod}</p>
+                <p>{obj.date}</p>
               </div>
               <div className="mb-1">
                 <h3>Address</h3>

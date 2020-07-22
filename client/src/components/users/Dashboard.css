@@ -54,3 +54,9 @@ hr {
   width: 100%;
   margin: 25px 0;
 }
+
+.dashboard > img {
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 150px;
+}

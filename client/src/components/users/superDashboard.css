@@ -31,6 +31,7 @@
 
 .list > li {
   margin: 10px;
+  text-align: start;
 }
 
 .btn-icon {
@@ -43,4 +44,13 @@
 
 .btn-icon:hover {
   color: var(--light-red);
+}
+
+@media screen and (max-width: 600px) {
+  .limit {
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

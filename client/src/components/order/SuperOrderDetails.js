@@ -31,6 +31,7 @@ const SuperOrderDetails = ({
 
   useEffect(() => {
     getActiveOrderById(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e) => {
@@ -97,6 +98,7 @@ const SuperOrderDetails = ({
                 <h3>Payment method</h3>
                 <hr />
                 <p>{order.payment.paymentMethod}</p>
+                <p>{order.date}</p>
               </div>
               <div className="mb-1">
                 <h3>Address</h3>

@@ -13,9 +13,12 @@ router.put("/:id", auth, async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     const cart = await Cart.findOne({ user: req.user.id });
+    const item = await cart.orders.filter(
+      (data) => data.productId.toString() === req.params.id
+    );
 
-    if (!product) {
-      return res.status(400).json({ msg: "There is no item with such id." });
+    if (item.length > 0) {
+      return res.status(400).json({ msg: "Item already in cart." });
     }
 
     if (product.countInStock === 0) {

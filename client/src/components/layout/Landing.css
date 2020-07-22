@@ -122,3 +122,14 @@
 .newsletter-btn:hover {
   background-color: var(--light-red);
 }
+
+@media screen and (max-width: 600px) {
+  .footer {
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+
+  .f-item {
+    width: 100%;
+  }
+}

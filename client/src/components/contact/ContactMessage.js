@@ -35,7 +35,7 @@ const ContactMessage = ({
         ) : (
           <div className="cart">
             <div className="cart-head">
-              <h3>Your Cart</h3>
+              <h3>Message(s)</h3>
               <button type="button" onClick={() => setIsClosed()}>
                 X
               </button>

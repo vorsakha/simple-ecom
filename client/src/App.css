@@ -82,6 +82,14 @@ h4 {
   color: tomato;
 }
 
+.star-red {
+  color: var(--red);
+}
+
+.start-blue {
+  color: var(--blue);
+}
+
 .content::-webkit-scrollbar,
 .cart-body::-webkit-scrollbar {
   width: 12px;

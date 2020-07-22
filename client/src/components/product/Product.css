@@ -59,3 +59,15 @@
   width: 55px;
   padding: 10px;
 }
+
+@media screen and (max-width: 600px) {
+  .product-wrapper {
+    flex-wrap: wrap;
+  }
+  .product-image {
+    width: 100%;
+  }
+  .product-info {
+    width: 100%;
+  }
+}

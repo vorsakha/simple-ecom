@@ -15,6 +15,7 @@ import { getAddresses, removeAddress } from "../../actions/address";
 
 const Dashboard = ({
   getHistory,
+  auth: { user },
   order: { orders },
   modal: { historyOpen, addressOpen },
   setHistoryOpen,
@@ -34,6 +35,7 @@ const Dashboard = ({
   return (
     <Fragment>
       <div className="dashboard">
+        {user !== null && <img src={user.avatar} alt="user avatar" />}
         <h1>My Account</h1>
         <div className="first dash-container">
           <h3 className="dash-title">
@@ -123,12 +125,14 @@ Dashboard.propTypes = {
   address: PropTypes.object.isRequired,
   getAddresses: PropTypes.func.isRequired,
   removeAddress: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   order: state.order,
   modal: state.modal,
   address: state.address,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, {

@@ -7,6 +7,7 @@ const auth = require("../../middleware/auth");
 const Order = require("../../models/Order");
 const User = require("../../models/User");
 const Cart = require("../../models/Cart");
+const Product = require("../../models/Product");
 
 // @route   POST api/order/
 // @desc    Order cart items
@@ -36,6 +37,19 @@ router.post(
       const itemsQuantity = [];
       let itemsPrice = 0;
 
+      const handleProduct = async (data) => {
+        const product = await Product.findById(data.productId);
+
+        if (product.countInStock < data.quantity) {
+          throw "Stock not sufficient.";
+        }
+
+        product.countInStock = product.countInStock - data.quantity;
+
+        await product.save();
+      };
+
+      cart.orders.map((data) => handleProduct(data));
       cart.orders.map((data) => itemsName.push(data.name));
       cart.orders.map((data) => itemsQuantity.push(data.quantity));
       cart.orders.map((data) => (itemsPrice = itemsPrice + Number(data.price)));

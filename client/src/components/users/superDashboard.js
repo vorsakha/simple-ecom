@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Fade } from "react-awesome-reveal";
 
 import Spinner from "../layout/Spinner";
 import ContactMessage from "../contact/ContactMessage";
@@ -90,7 +89,7 @@ const SuperDashboard = ({
                   contacts.map((data, k) => (
                     <li key={k}>
                       <button
-                        className="link"
+                        className="link limit"
                         onClick={() => handleMessage(data._id)}
                       >
                         {`${data.email} - (${data.message.length}) message(s)`}{" "}
@@ -124,12 +123,11 @@ const SuperDashboard = ({
                     <li key={k}>
                       <button
                         type="button"
-                        className="link"
+                        className="link limit"
                         onClick={() => handleOrder(data._id)}
                       >
                         {data._id}
                       </button>{" "}
-                      - Total: ${data.items.totalPrice} -{" "}
                       {data.isDelivered ? (
                         <i className="fas fa-check color-success"></i>
                       ) : (
@@ -156,7 +154,7 @@ const SuperDashboard = ({
             {products === null && loading ? (
               <Spinner />
             ) : (
-              <ul className="list">
+              <ul className="list ">
                 {products.length > 0 ? (
                   products.map((data, k) => (
                     <li key={k}>

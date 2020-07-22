@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  width: 400px;
+  margin: 0 auto;
   border: 0;
 }
 
@@ -90,4 +92,23 @@
 
 .in-card > button:hover {
   color: var(--light-red);
+}
+
+@media screen and (max-width: 600px) {
+  .modal {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .cart {
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .cart-head {
+    justify-content: center;
+  }
+  .cart-head > h3 {
+    width: 70%;
+  }
 }

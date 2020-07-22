@@ -42,6 +42,9 @@ export const addToCart = (id, quantity) => async (dispatch) => {
       type: CART_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+    dispatch(
+      setAlert(err.response.status === 400 && "Item already in cart.", "danger")
+    );
   }
 };
 

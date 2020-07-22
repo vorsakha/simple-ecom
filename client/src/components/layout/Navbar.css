@@ -25,6 +25,14 @@ nav {
   padding: 0;
 }
 
+.mini {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  align-items: center;
+  padding: 0;
+}
+
 .dropdown-content {
   list-style: none;
   padding: 0;
@@ -108,7 +116,7 @@ nav {
   color: var(--blue);
   font-weight: lighter;
   letter-spacing: 1.7px;
-  background-color: transparent;
+  background-color: var(--white);
   border: 0;
   transition: color 0.3s;
   font-size: 16.5px;
@@ -144,6 +152,98 @@ nav {
 }
 
 .logo-dot {
-  font-size: 20px;
+  font-size: 15px;
   margin: 2px;
+}
+
+.menu-mobile {
+  display: none;
+}
+
+.mini-avatar {
+  width: 20px;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    padding: 0;
+  }
+  .menu-ul {
+    display: none;
+  }
+  .menu-mobile {
+    display: flex;
+    list-style: none;
+    position: absolute;
+    left: 70vw;
+    bottom: 7px;
+  }
+  .mobile-content {
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: 200px;
+    background-color: var(--white);
+    width: 50vw;
+    height: 350px;
+    position: relative;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2.8px 2.2px rgba(29, 53, 87, 0.034),
+      0 6.7px 5.3px rgba(29, 53, 87, 0.048),
+      0 12.5px 10px rgba(29, 53, 87, 0.06),
+      0 22.3px 17.9px rgba(29, 53, 87, 0.072),
+      0 41.8px 33.4px rgba(29, 53, 87, 0.086),
+      0 100px 80px rgba(29, 53, 87, 0.12);
+    z-index: 1;
+  }
+  li {
+    list-style: none;
+  }
+  .mobile-btn {
+    background-color: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    border: 0;
+    color: var(--blue);
+  }
+  .shop-dropdown {
+    position: relative;
+    padding: 0;
+    background-color: var(--white);
+    width: 100%;
+  }
+  .mobile-content li {
+    padding: 10px;
+    background-color: var(--white);
+  }
+  .menu-a {
+    padding: 10px;
+  }
+  .cart-btn {
+    text-decoration: none;
+  }
+  .logo {
+    margin-left: 10px;
+    font-size: 50px;
+  }
+  .logo-dot {
+    font-size: 10px;
+    margin: 1px;
+  }
+  .mini-nav {
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .log {
+    font-size: 13px;
+    margin: 0;
+  }
 }

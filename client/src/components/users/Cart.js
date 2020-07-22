@@ -84,7 +84,9 @@ const Cart = ({
                   {cart.orders.length > 0 && <span>Total: $</span>}
                   {cart.orders.length > 0 &&
                     cart.orders
-                      .map((data) => data.price * data.quantity)
+                      .map(
+                        (data) => (data.price / data.quantity) * data.quantity
+                      )
                       .reduce((total, num) => total + num)
                       .toFixed(2)}
                 </Fragment>

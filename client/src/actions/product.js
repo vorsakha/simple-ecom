@@ -11,7 +11,7 @@ import {
 } from "./types";
 
 // Create product (super)
-export const createProduct = (formData, history) => async (dispatch) => {
+export const createProduct = (formData) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -27,8 +27,6 @@ export const createProduct = (formData, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Product created.", "success"));
-
-    //history.push("/super-dashboard");
   } catch (err) {
     if (err.response) {
       const errors = err.response.data.errors;
@@ -46,7 +44,7 @@ export const createProduct = (formData, history) => async (dispatch) => {
 };
 
 // Edit product (super)
-export const editProduct = (formData, id, history) => async (dispatch) => {
+export const editProduct = (formData, id) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -62,8 +60,6 @@ export const editProduct = (formData, id, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Product successfully edited.", "success"));
-
-    history.push("/dashboard");
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -127,7 +123,7 @@ export const getProductById = (id) => async (dispatch) => {
 };
 
 // Rate a product
-export const rateProduct = (id, formData, history) => async (dispatch) => {
+export const rateProduct = (id, formData) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -143,8 +139,6 @@ export const rateProduct = (id, formData, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Rating added.", "success"));
-
-    history.push("/");
   } catch (err) {
     dispatch({
       type: PRODUCT_ERROR,

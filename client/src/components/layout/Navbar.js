@@ -16,6 +16,8 @@ const Navbar = ({
   setIsOpen,
 }) => {
   const [categories, setCategory] = useState(null);
+  const [toggleMenu, setToggle] = useState(false);
+  const [toggleShop, setToggleShop] = useState(false);
 
   useEffect(() => {
     const unique = [...new Set(products.map((data) => data.category))];
@@ -24,7 +26,7 @@ const Navbar = ({
   }, [products]);
 
   const authMiniLinks = (
-    <ul className="menu-ul">
+    <ul className="mini">
       <li>
         <Link to={isAdmin ? "/super-dashboard" : "/dashboard"} className="log">
           <i className={isAdmin ? "fas fa-users-cog" : "fas fa-user"}></i>{" "}
@@ -44,7 +46,7 @@ const Navbar = ({
   );
 
   const guestMiniLinks = (
-    <ul className="menu-ul">
+    <ul className="mini">
       <li>
         <Link className="log" to="/login">
           LOG IN
@@ -59,6 +61,86 @@ const Navbar = ({
         </Link>
       </li>
     </ul>
+  );
+
+  const menu = (
+    <Fragment>
+      <ul className="menu-mobile">
+        <li>
+          <button
+            className="mobile-btn"
+            type="button"
+            onClick={() => {
+              setToggle(!toggleMenu);
+              setToggleShop(false);
+            }}
+          >
+            <i className="fas fa-bars"></i>
+          </button>
+        </li>
+      </ul>
+      {toggleMenu && (
+        <Fade cascade duration={500}>
+          <ul className="mobile-content">
+            <li>
+              <button
+                className="dropdown-btn"
+                type="button"
+                onClick={() => setToggleShop(!toggleShop)}
+              >
+                <i className="fas fa-caret-left"></i> SHOP
+              </button>
+              {toggleShop && (
+                <Fade cascade duration={500}>
+                  <ul className="shop-dropdown">
+                    {categories !== null &&
+                      categories.map((data, k) => (
+                        <li key={k}>
+                          <Link
+                            className="menu-a"
+                            to={`/products/${data}`}
+                            onClick={() => {
+                              setToggle(!toggleMenu);
+                              setToggleShop(false);
+                            }}
+                          >
+                            {data}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                </Fade>
+              )}
+            </li>
+            <li>
+              <Link
+                className="cart-btn"
+                to="/contact"
+                onClick={() => {
+                  setToggle(!toggleMenu);
+                  setToggleShop(false);
+                }}
+              >
+                CONTACT
+              </Link>
+            </li>
+            <li>
+              <button
+                className="cart-btn"
+                onClick={() => {
+                  setIsOpen();
+
+                  setToggle(!toggleMenu);
+                  setToggleShop(false);
+                }}
+              >
+                CART
+              </button>
+            </li>
+          </ul>
+        </Fade>
+      )}
+    </Fragment>
   );
 
   return (
@@ -107,6 +189,7 @@ const Navbar = ({
               </button>
             </li>
           </ul>
+          {menu}
         </div>
       </nav>
     </Fragment>
